@@ -4,11 +4,17 @@ import { toast } from 'react-hot-toast';
 const Context = createContext();
 
 export const StateContext = ({ children }) => {
+  // states
   const [showCart, setShowCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [qty, setQty] = useState(1);
+
+  //   product we want to update
+  let foundProduct;
+  //   index of property we want to update
+  let index;
 
   //   handle increase quantity
   const increaseQty = () => {
@@ -55,6 +61,36 @@ export const StateContext = ({ children }) => {
     toast.success(`${qty} ${product.name} added to the cart.`);
   };
 
+  //   handle cart item quantity toggle
+  const toggleCartItemQuantity = (id, value) => {
+    foundProduct = cartItems.find((item) => item._id === id);
+    index = cartItems.findIndex((product) => product._id === id);
+
+    // getting all items that arent selected for changing quantity
+    const newCartItems = cartItems.filter((item) => item._id !== id);
+
+    // need to know if were decrementing or incrementing
+    if (value === 'increment') {
+      setCartItems([
+        ...newCartItems,
+        { ...foundProduct, quantity: foundProduct.quantity + 1 },
+      ]);
+      setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
+      setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
+
+      //   access specific card index with found product
+    } else if (value === 'decrement') {
+      if (foundProduct.quantity > 1) {
+        setCartItems([
+          ...newCartItems,
+          { ...foundProduct, quantity: foundProduct.quantity - 1 },
+        ]);
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
+      }
+    }
+  };
+
   return (
     //   wrap everything with context provider
     <Context.Provider
@@ -68,6 +104,7 @@ export const StateContext = ({ children }) => {
         increaseQty,
         decreaseQty,
         onAdd,
+        toggleCartItemQuantity,
       }}
     >
       {children}
