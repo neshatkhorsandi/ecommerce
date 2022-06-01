@@ -1,3 +1,4 @@
+// imports
 import React from 'react';
 import Link from 'next/link';
 import { urlFor } from '../lib/client';
@@ -20,6 +21,7 @@ const HeroBanner = ({ heroBanner }) => {
             <button type='button'>{heroBanner.buttonText}</button>
           </Link>
 
+          {/* banner description */}
           <div className='desc'>
             <h5>Description</h5>
             <p>{heroBanner.desc}</p>

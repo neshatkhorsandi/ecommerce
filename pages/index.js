@@ -21,6 +21,7 @@ const Home = ({ products, bannerData }) => {
   );
 };
 
+// rendering all data before the page builds
 export const getServerSideProps = async () => {
   // fetch all data from the sanity dashboard
   const productQuery = '*[_type == "product"]';

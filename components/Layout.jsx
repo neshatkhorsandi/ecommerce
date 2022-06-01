@@ -1,3 +1,4 @@
+// imports
 import React from 'react';
 // head is the same as head in html
 // gives u metadata about ur site

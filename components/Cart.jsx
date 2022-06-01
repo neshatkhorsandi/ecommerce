@@ -78,6 +78,7 @@ const Cart = () => {
                   {/* bottom container for quantity */}
                   <div className='flex bottom'>
                     <div>
+                      {/* minus/plus/quantity container */}
                       <p className='quantity-desc'>
                         {/* minus */}
                         <span
@@ -105,6 +106,8 @@ const Cart = () => {
                         </span>
                       </p>
                     </div>
+
+                    {/* remove button */}
                     <button
                       type='button'
                       className='remove-item'
@@ -125,9 +128,10 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
 
+            {/* pay btn */}
             <div className='btn-container'>
-              <button type='button' className='btn' onClick=''>
-                Pay with Stripe
+              <button type='button' className='btn'>
+                Pay
               </button>
             </div>
           </div>

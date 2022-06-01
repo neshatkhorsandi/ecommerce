@@ -1,3 +1,4 @@
+// imports
 import React from 'react';
 import Link from 'next/link';
 import { urlFor } from '../lib/client';
@@ -17,8 +18,10 @@ const FooterBanner = ({
   },
 }) => {
   return (
+    // footer banner container
     <div className='footer-banner-container'>
       <div className='banner-desc'>
+        {/* left side of footer banner */}
         <div className='left'>
           <p>{discount}</p>
           <h3>{largeText1}</h3>
@@ -26,6 +29,7 @@ const FooterBanner = ({
           <p>{saleTime}</p>
         </div>
 
+        {/* right side of footer banner */}
         <div className='right'>
           <p>{smallText}</p>
           <h3>{midText}</h3>
@@ -35,6 +39,7 @@ const FooterBanner = ({
           </Link>
         </div>
 
+        {/* footer image */}
         <img
           src={urlFor(image)}
           className='footer-banner-image'
